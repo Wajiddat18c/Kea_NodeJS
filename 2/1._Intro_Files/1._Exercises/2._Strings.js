@@ -28,3 +28,28 @@ var avg = (one + two + three) / 3;
 console.log(avg.toFixed(5))
 // --------------------------------------
 
+
+// --------------------------------------
+// Exercise 6 - Get the character by index
+
+var letters = "abc";
+// Get me the character "c"
+
+console.log(letters.charAt(2));
+console.log(letters[2]);
+// --------------------------------------
+// Exercise 7 - Replace
+
+var fact = "You are learning javascript!";
+
+// capitalize the J in Javascript
+
+
+console.log(fact.replace("j", "J"));
+// --------------------------------------
+
+//Object
+var computer = {
+    
+};
+
