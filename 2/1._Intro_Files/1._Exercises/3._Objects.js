@@ -29,5 +29,7 @@ var thisSong = {"description": "The best song in the world."};
 // remove the property "description" and add a property called "about" that should say "Just a tribute." 
 delete thisSong.description;
 thisSong.about = "Just a tribute.";
+console.log(thisSong);
 // --------------------------------------
+
 
