@@ -45,9 +45,9 @@ console.log(diet);
 
 // You really like your daily diet from last exercise. Copy it to a new array called dinnerTray so you can give it to a friend.  
 
-var dinnerTray = diet;
+var dinnerTray = diet.slice();
 
-console.log(dinnerTray);
+console.log("New Dinnter", dinnerTray);
 // --------------------------------------
 
 // --------------------------------------
@@ -69,10 +69,9 @@ var discardedNumbers = [];
 
 // log the element if the number is above 6 or below 0
 // else push them to the array discardedNumbers
-var k = 0;
-for(k; k < numbers.length; k++){
+for(var k = 0; k < numbers.length; k++){
 
-    if (numbers[k] > 6 || numbers[k] < 0) {
+    if (numbers[k] < 0 || numbers[k] > 6) {
         console.log(numbers[k])
 
     } else {
