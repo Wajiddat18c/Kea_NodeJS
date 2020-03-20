@@ -10,8 +10,7 @@ app.use(express.json())
 
 
 let cars = [
-    { id: 1, brand: "Mercedes" }, 
-    { id: 2, brand: "BMW" }
+    id: 1, brand: "Mercedes"
 ];
 
 let currentId = 2;
