@@ -5,3 +5,16 @@
 #logo{
    width: 10%;
 }
+
+#main-content{
+    min-height: calc(100vh - 90px);
+}
+
+footer{
+    height: 10px;
+    font-weight: bold;
+}
+#upload_link{
+    float: right;
+    font-size: large;
+}
