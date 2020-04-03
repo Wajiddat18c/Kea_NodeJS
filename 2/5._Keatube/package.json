@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env PORT=80 node app.js",
     "start-dev": "cross-env PORT=3000 nodemon app.js",
-    "start-prod": "cross-env PORT=80 pm2 start app.js"
+    "start-prod": "sudo cross-env PORT=80 pm2 start app.js"
   },
   "keywords": [
     "video"
