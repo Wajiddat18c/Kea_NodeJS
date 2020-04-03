@@ -29,7 +29,6 @@ const storage = multer.diskStorage({
 //what {key: value}
 const videos = [
     {
-        id: "",
         title: "Beach",
         thumbnail: "",
         description: "Watch people running",
@@ -62,13 +61,41 @@ router.get("/videos/:videoId", (req, res) => {
 
 router.post("/videos", upload.single('uploadedVideo'), (req, res) =>{
 
-    // console.log(req.file);
-    return res.redirect("/");
-})
 
-// router.post("/test", (req, res)=>{
-//     const text = req.body.textInput;
-//     return res.send({response: text})
-// });
+    const videoData = {
+        title: req.body.title.trim(),
+        description: req.body.description,
+        fileName: req.file.filename,
+        thumbnail: "",
+        uploadDate: new Date(),
+        category: req.body.category,
+        tags: req.body.tags.split(/\s*[,\s]\s*/)
+        
+    }
+
+    console.log(videoData)
+
+
+    if (videoData.title.length === 0 || videoData.title.length > 128) {
+        return res.status(400).send({response: "Title can not be empty OR longer than 128 char"})
+    }
+
+    if (videoData.description.length > 2048) {
+        return res.status(400).send({response: "Description can not be more than 2048 chars"})
+    }
+
+    const fileSizeLimit = 262144000;
+
+    if(req.file.size > fileSizeLimit){
+        return res.status(400).send({response: "Size must be less than 218mb"})
+
+    }
+
+    videos.push(videoData);
+
+    
+    //redirect to frontpage
+    return res.redirect("/");
+});
 
 module.exports = router;    
