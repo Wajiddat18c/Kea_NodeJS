@@ -17,7 +17,11 @@
     <br> 
     <textarea placeholder="tags" name="tags" rows="10" cols="25"></textarea>
     <br>
-    <input type="file" name="uploadedVideo" accept="video/*"  onchange="handleFileUpload(this.files)"/>
+    <label>Vælg Video</label> <input type="file" name="uploadedVideo" accept="video/*"  onchange="handleFileUpload(this.files)"/>
+    <br>
+  
+    <label>Vælg Thumbnail</label> <input type="file" name="uploadedVideo" accept="image/*">
+    <br>
     <button type="submit">Submit</button>
   </form>
 

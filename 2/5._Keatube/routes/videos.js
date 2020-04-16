@@ -3,7 +3,10 @@ const router = require("express").Router();
 const crypto = require("crypto");
 
 
+
 const multer  = require('multer')
+
+
 const storage = multer.diskStorage({
     destination: (req, file, cb)=>{
         cb(null, "videos/")
@@ -12,13 +15,16 @@ const storage = multer.diskStorage({
        
         const mimetypeArray = file.mimetype.split("/");
 
-        if(mimetypeArray[0] === "video"){
+        if(mimetypeArray[0] === "video" || mimetypeArray[0] === "image"){
         const extension = mimetypeArray[mimetypeArray.length-1] 
         let random = crypto.randomBytes(18).toString("hex")
 
             cb(null, random + "." + extension);
         } else{
             cb("ERROR: The file is not a video")
+            console.log(file)
+            console.log(file.mimetype)
+            console.log(mimetypeArray)
         }
     } 
 });
@@ -26,11 +32,13 @@ const storage = multer.diskStorage({
 
   const upload = multer({ storage: storage });
 
+  
+
 //what {key: value}
 const videos = [
     {
         title: "Beach",
-        thumbnail: "",
+        thumbnail: "beach.png",
         description: "Watch people running",
         fileName: "f1a102ea-73a9-498e-a6fb-dbf3f1e49936.mp4",
         uploadDate: "",
@@ -59,21 +67,24 @@ router.get("/videos/:videoId", (req, res) => {
     return res.send({ response: videos.find(video => video.fileName === req.params.videoId) });
 });
 
-router.post("/videos", upload.single('uploadedVideo'), (req, res) =>{
+router.post("/videos", upload.array('uploadedVideo'), (req, res) =>{
+
+
+    const fileEx = req.files;
 
 
     const videoData = {
         title: req.body.title.trim(),
         description: req.body.description,
-        fileName: req.file.filename,
-        thumbnail: "",
+        fileName: fileEx[0].filename,
+        thumbnail: fileEx[1].filename,
         uploadDate: new Date(),
         category: req.body.category,
         tags: req.body.tags.split(/\s*[,\s]\s*/)
         
     }
-
     console.log(videoData)
+    
 
 
     if (videoData.title.length === 0 || videoData.title.length > 128) {
@@ -86,7 +97,7 @@ router.post("/videos", upload.single('uploadedVideo'), (req, res) =>{
 
     const fileSizeLimit = 262144000;
 
-    if(req.file.size > fileSizeLimit){
+    if(fileEx[0].filename.size > fileSizeLimit){
         return res.status(400).send({response: "Size must be less than 218mb"})
 
     }
