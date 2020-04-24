@@ -7,7 +7,7 @@ const url = 'mongodb://localhost:27017';
 
 
 MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
-  var myobj = { animal: "Bobcat", age: 16 };
+  var myobj = { animal: "Lion", age: 16 };
 
   const dbName = db.db('bigCatsZoo');
 

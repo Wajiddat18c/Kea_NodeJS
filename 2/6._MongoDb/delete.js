@@ -12,7 +12,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, db) {
     
     var myquery = { animal: "GeoPart" };
 
-    dbName.collection("cats").deleteOne(myquery, function(err, obj) {
+    dbName.collection("cats").deleteOne(myquery, (err, obj) => {
 
         console.log("1 document deleted");
       db.close();
