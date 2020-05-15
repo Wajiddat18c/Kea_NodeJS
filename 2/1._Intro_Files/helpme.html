@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What to do?</title>
+</head>
+<body>
+    <h1> 
+        Help me?
+    </h1>
+    <h2>
+        Ok! you can do this...
+    </h2>
+
+    <h4 id="doSomething"></h4>
+    <script>
+        
+        // fetch("https://www.boredapi.com/api/activity")
+        // .then(response => response.json())
+        // .then(data => {
+        //     document.getElementById('doSomething').textContent = data.activity;
+        // });
+
+        const bored = async ()  => {
+
+            let response = await fetch("https://www.boredapi.com/api/activity");
+
+            let data = await response.json();
+
+            return data;
+        }
+
+        bored()
+        .then(data => document.getElementById('doSomething').textContent = data.activity);
+
+
+    </script>
+</body>
+</html>

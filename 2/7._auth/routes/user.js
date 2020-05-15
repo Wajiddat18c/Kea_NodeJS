@@ -11,6 +11,29 @@ router.get("/users", async (req, res) =>{
     res.send({ Response : allUsersWithElectives})
 })
 
+
+router.get("/setsessionvalue", (req, res) =>{
+  req.session.isOn = true;
+  console.log(req.session)
+  return res.send({ response : "Ok"})
+})
+
+router.get("/getsessionvalue", (req, res) =>{
+
+  
+  return res.send({ response : req.session.isOn})
+})
+
+
+router.get("/anyvalue/:id", (req, res) => { 
+
+  //dynamiclly pass data to this endpoint and console log it.
+
+  console.log(req.params);
+  return res.send({});
+})
+
+
 router.post("/user", async (req, res) =>{
 
 

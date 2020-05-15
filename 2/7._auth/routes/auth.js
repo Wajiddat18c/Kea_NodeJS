@@ -1,7 +1,19 @@
 const router = require("express").Router();
 const User = require("../models/User");
 
+
+const bcrypt = require("bcrypt");
+const saltRounds = 12;
+
+  // bcrypt.hash("password", saltRounds).then(hash => console.log(hash));
+
+  // bcrypt.compare("password", "$2b$12$rTUYmXfL/ohQGnfX5qxFTuXQZljBTb4vtYJoqs/qC/sJ9OWTZbBFS").then(result => console.log(result))
+
+
+
 router.get("/logout", (req, res) => {
+
+
   return res.status(501).send({ Response: "OK, LOGOUT WORKING!!" });
 });
 
@@ -28,9 +40,12 @@ router.post("/signup", (req, res) => {
             if (foundUser.length > 0) {
               return res.status(400).send({ response: "User already exists" });
             } else {
+
+              const hashedPassword = await bcrypt.hash(password, saltRounds);
+
               const newUser = await User.query().insert({
                 username: username,
-                password: password
+                password: hashedPassword 
               });
               return res.send({ response: "User added", username});
 
@@ -53,6 +68,11 @@ router.post("/signup", (req, res) => {
 // });
 
 router.post("/login", (req, res) => {
+
+  const { username, password } = req.body;
+
+  
+
   return res.status(501).send({ Response: "OK, LOGIN WORKING!!" });
 });
 
